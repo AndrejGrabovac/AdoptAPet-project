@@ -1,0 +1,31 @@
+### Create a new pet
+POST http://localhost:5000/api/pets
+Content-Type: application/json
+
+{
+  "name": "Buddy",
+  "age": 3,
+  "breedId": 1,
+  "shelterId": 1
+}
+
+### Get all pets
+GET http://localhost:5000/api/pets
+
+### Get a specific pet by ID
+GET http://localhost:5000/api/pets/1
+
+### Update a pet
+PUT http://localhost:5000/api/pets/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Buddy",
+  "age": 4,
+  "breedId": 1,
+  "shelterId": 1
+}
+
+### Delete a pet
+DELETE http://localhost:5000/api/pets/1

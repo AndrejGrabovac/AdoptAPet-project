@@ -1,0 +1,25 @@
+### Create a new breed
+POST http://localhost:5000/api/breeds
+Content-Type: application/json
+
+{
+  "name": "Golden Retriever"
+}
+
+### Get all breeds
+GET http://localhost:5000/api/breeds
+
+### Get a specific breed by ID
+GET http://localhost:5000/api/breeds/1
+
+### Update a breed
+PUT http://localhost:5000/api/breeds/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Labrador Retriever"
+}
+
+### Delete a breed
+DELETE http://localhost:5000/api/breeds/1

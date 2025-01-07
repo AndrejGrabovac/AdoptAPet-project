@@ -1,0 +1,29 @@
+### Create a new shelter
+POST http://localhost:5000/api/shelters
+Content-Type: application/json
+
+{
+  "name": "New Shelter",
+  "address": "1234 Pet Lane",
+  "phoneNumber": "123-456-7890"
+}
+
+### Get all shelters
+GET http://localhost:5000/api/shelters
+
+### Get a specific shelter by ID
+GET http://localhost:5000/api/shelters/1
+
+### Update a shelter
+PUT http://localhost:5000/api/shelters/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Updated Shelter",
+  "address": "5678 Animal Ave",
+  "phoneNumber": "098-765-4321"
+}
+
+### Delete a shelter
+DELETE http://localhost:5000/api/shelters/1

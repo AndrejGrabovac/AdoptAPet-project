@@ -1,0 +1,29 @@
+### Create a new adoption request
+POST http://localhost:5000/api/adoptionRequests
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "petId": 2,
+  "requestDate": "2023-10-01"
+}
+
+### Get all adoption requests
+GET http://localhost:5000/api/adoptionRequests
+
+### Get a specific adoption request by ID
+GET http://localhost:5000/api/adoptionRequests/1
+
+### Update an adoption request
+PUT http://localhost:5000/api/adoptionRequests/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "userId": 1,
+  "petId": 2,
+  "requestDate": "2023-10-01"
+}
+
+### Delete an adoption request
+DELETE http://localhost:5000/api/adoptionRequests/1
