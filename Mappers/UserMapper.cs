@@ -25,6 +25,7 @@ public static class UserMapper
         };
     }
 
+    /*
     public static User ToUser(this UserCreateDto dto)
     {
         return new User()
@@ -35,6 +36,7 @@ public static class UserMapper
             PhoneNumber = dto.PhoneNumber
         };
     }
+    */
     
     public static User ToUser(this UserUpdateDto dto)
     {

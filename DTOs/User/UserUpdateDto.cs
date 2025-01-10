@@ -11,5 +11,5 @@ public class UserUpdateDto
     public string Name { get; set; } = null!;
     
     [Phone]
-    public string? PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; }
 }

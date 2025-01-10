@@ -8,5 +8,5 @@ public class UserDetailDto
 
     public string Email { get; set; } = null!;
     
-    public string? PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; }
 }

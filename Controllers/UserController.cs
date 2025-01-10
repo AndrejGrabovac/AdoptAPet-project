@@ -5,6 +5,7 @@ using AdoptAPet.Data;
 using AdoptAPet.DTOs.User;
 using AdoptAPet.Mappers;
 using AdoptAPet.Models;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace AdoptAPet.Controllers
@@ -85,7 +86,8 @@ namespace AdoptAPet.Controllers
             }
             return NoContent();
         }
-
+        
+        /*
         // POST: api/User
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -97,6 +99,7 @@ namespace AdoptAPet.Controllers
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
+        */
 
         // DELETE: api/User/5
         [HttpDelete("{id}")]
