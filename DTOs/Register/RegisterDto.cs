@@ -4,7 +4,7 @@ namespace AdoptAPet.DTOs.Register;
 
 public class RegisterDto
 {  
-    [Microsoft.Build.Framework.Required]
+    [Required]
     [StringLength(30)]
     public string Name { get; set; }
     

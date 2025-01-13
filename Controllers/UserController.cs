@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 
 namespace AdoptAPet.Controllers
-{
+{   
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -22,6 +22,7 @@ namespace AdoptAPet.Controllers
         }
 
         // GET: api/User
+        [Authorize(Roles = "Admin,User")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers(int page = 1, int pageSize = 5)
         {   
@@ -40,6 +41,7 @@ namespace AdoptAPet.Controllers
         }
 
         // GET: api/User/5
+        [Authorize(Roles = "Admin,User")]
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDetailDto>> GetUser(int id)
         {
@@ -55,6 +57,7 @@ namespace AdoptAPet.Controllers
 
         // PUT: api/User/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, UserUpdateDto userDto)
         {
@@ -102,6 +105,7 @@ namespace AdoptAPet.Controllers
         */
 
         // DELETE: api/User/5
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {

@@ -9,7 +9,7 @@ Content-Type: application/json
 }
 
 ### Get all adoption requests
-GET http://localhost:5000/api/adoptionRequests
+GET http://localhost:5182/api/adoptionRequest
 
 ### Get a specific adoption request by ID
 GET http://localhost:5000/api/adoptionRequests/1

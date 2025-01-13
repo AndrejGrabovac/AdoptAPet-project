@@ -11,6 +11,8 @@ public class DataContext : DbContext
     public DbSet<Breed> Breeds { get; set; }
     public DbSet<AdoptionRequest> AdoptionRequests { get; set; }
     
+    public DbSet<RefreshToken> RefreshToken { get; set; }
+    
     public DbSet<Role> Roles { get; set; }
     
     public DataContext(DbContextOptions options) : base(options)

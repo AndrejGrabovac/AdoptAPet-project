@@ -48,7 +48,7 @@ namespace AdoptAPet.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AdoptionRequests");
+                    b.ToTable("AdoptionRequests", (string)null);
                 });
 
             modelBuilder.Entity("AdoptAPet.Models.Breed", b =>
@@ -65,7 +65,7 @@ namespace AdoptAPet.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Breeds");
+                    b.ToTable("Breeds", (string)null);
                 });
 
             modelBuilder.Entity("AdoptAPet.Models.Pet", b =>
@@ -102,7 +102,7 @@ namespace AdoptAPet.Migrations
 
                     b.HasIndex("ShelterId");
 
-                    b.ToTable("Pets");
+                    b.ToTable("Pets", (string)null);
                 });
 
             modelBuilder.Entity("AdoptAPet.Models.RefreshToken", b =>
@@ -127,7 +127,7 @@ namespace AdoptAPet.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RefreshToken");
+                    b.ToTable("RefreshToken", (string)null);
                 });
 
             modelBuilder.Entity("AdoptAPet.Models.Role", b =>
@@ -143,7 +143,7 @@ namespace AdoptAPet.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
 
                     b.HasData(
                         new
@@ -180,7 +180,7 @@ namespace AdoptAPet.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Shelters");
+                    b.ToTable("Shelters", (string)null);
                 });
 
             modelBuilder.Entity("AdoptAPet.Models.User", b =>
@@ -219,7 +219,7 @@ namespace AdoptAPet.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("AdoptAPet.Models.AdoptionRequest", b =>

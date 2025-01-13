@@ -5,9 +5,10 @@ using AdoptAPet.Data;
 using AdoptAPet.DTOs.Breed;
 using AdoptAPet.Mappers;
 using AdoptAPet.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AdoptAPet.Controllers
-{
+{   
     [Route("api/[controller]")]
     [ApiController]
     public class BreedController : ControllerBase
@@ -20,6 +21,7 @@ namespace AdoptAPet.Controllers
         }
 
         // GET: api/Breed
+        [Authorize(Roles = "Admin,User")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BreedDto>>> GetBreeds(int page = 1, int pageSize = 5)
         {   
@@ -36,6 +38,7 @@ namespace AdoptAPet.Controllers
         }
 
         // GET: api/Breed/5
+        [Authorize(Roles = "Admin,User")]
         [HttpGet("{id}")]
         public async Task<ActionResult<BreedDto>> GetBreed(int id)
         {
@@ -51,6 +54,7 @@ namespace AdoptAPet.Controllers
 
         // PUT: api/Breed/5
         // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBreed(int id, BreedUpdateDto breedDto)
         {
@@ -89,6 +93,7 @@ namespace AdoptAPet.Controllers
 
         // POST: api/Breed
         // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<Breed>> PostBreed(BreedCreateDto breedDto)
         {
@@ -100,6 +105,7 @@ namespace AdoptAPet.Controllers
         }
 
         // DELETE: api/Breed/5
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBreed(int id)
         {

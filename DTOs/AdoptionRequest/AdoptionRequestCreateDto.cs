@@ -12,4 +12,6 @@ public class AdoptionRequestCreateDto
 
     [Required]
     public int PetId { get; set; }
+    
+    public bool IsApproved { get; set; }
 }

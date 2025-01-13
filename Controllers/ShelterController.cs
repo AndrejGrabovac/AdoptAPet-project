@@ -5,9 +5,10 @@ using AdoptAPet.Data;
 using AdoptAPet.DTOs.Shelter;
 using AdoptAPet.Mappers;
 using AdoptAPet.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AdoptAPet.Controllers
-{
+{   
     [Route("api/[controller]")]
     [ApiController]
     public class ShelterController : ControllerBase
@@ -20,6 +21,7 @@ namespace AdoptAPet.Controllers
         }
 
         // GET: api/Shelter
+        [Authorize(Roles = "Admin,User")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ShelterDto>>> GetShelters(int page = 1, int pageSize = 5)
         {   
@@ -37,6 +39,7 @@ namespace AdoptAPet.Controllers
         }
 
         // GET: api/Shelter/5
+        [Authorize(Roles = "Admin,User")]
         [HttpGet("{id}")]
         public async Task<ActionResult<ShelterDetailDto>> GetShelter(int id)
         {
@@ -52,6 +55,7 @@ namespace AdoptAPet.Controllers
 
         // PUT: api/Shelter/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutShelter(int id, ShelterUpdateDto shelterDto)
         {
@@ -87,6 +91,7 @@ namespace AdoptAPet.Controllers
 
         // POST: api/Shelter
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<Shelter>> PostShelter(ShelterCreateDto shelterDto)
         {
@@ -97,6 +102,7 @@ namespace AdoptAPet.Controllers
         }
 
         // DELETE: api/Shelter/5
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteShelter(int id)
         {

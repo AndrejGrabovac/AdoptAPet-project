@@ -5,9 +5,10 @@ using AdoptAPet.Data;
 using AdoptAPet.DTOs.Pet;
 using AdoptAPet.Mappers;
 using AdoptAPet.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AdoptAPet.Controllers
-{
+{   
     [Route("api/[controller]")]
     [ApiController]
     public class PetController : ControllerBase
@@ -20,6 +21,7 @@ namespace AdoptAPet.Controllers
         }
 
         // GET: api/Pet
+        [Authorize(Roles = "Admin,User")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PetDto>>> GetPets(int page = 1, int pageSize = 5)
         {
@@ -37,6 +39,7 @@ namespace AdoptAPet.Controllers
         }
 
         // GET: api/Pet/5
+        [Authorize(Roles = "Admin,User")]
         [HttpGet("{id}")]
         public async Task<ActionResult<PetDetailDto>> GetPet(int id)
         {
@@ -52,6 +55,7 @@ namespace AdoptAPet.Controllers
 
         // PUT: api/Pet/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPet(int id, PetUpdateDto petDto)
         {
@@ -85,6 +89,7 @@ namespace AdoptAPet.Controllers
 
         // POST: api/Pet
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<Pet>> PostPet(PetCreateDto petDto)
         {   
@@ -104,6 +109,7 @@ namespace AdoptAPet.Controllers
         }
 
         // DELETE: api/Pet/5
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePet(int id)
         {

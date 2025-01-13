@@ -61,6 +61,7 @@ namespace AdoptAPet.Controllers;
         public async Task<ActionResult<TokenResponse>> Login([FromBody] LoginDto loginDto)
         {
             User? user = await _context.Users
+                .Include(u => u.Role)
                 .FirstOrDefaultAsync(u => u.Email == loginDto.Email);
 
             if (user == null || !VerifyPasswordHash(loginDto.Password, user.PasswordHash, user.PasswordSalt))
@@ -98,21 +99,27 @@ namespace AdoptAPet.Controllers;
         {
             User? user = await _context.Users
                 .Include(u => u.RefreshTokens)
+                .Include(u => u.Role)
                 .FirstOrDefaultAsync(u =>
                     u.RefreshTokens.Any(rt =>
                         rt.Value == refreshTokenRequest.RefreshToken
                         && rt.ExpiresAt > DateTime.Now));
 
-            if (user == null)
+            RefreshToken? existingRefreshToken = await _context.RefreshToken
+                .Where(rt => rt.Value == refreshTokenRequest.RefreshToken)
+                .FirstOrDefaultAsync();
+                
+            if (user == null || existingRefreshToken == null)
             {
                 return Unauthorized("Invalid refresh token.");
             }
 
-            user.RefreshTokens.RemoveAll(rt => rt.Value == refreshTokenRequest.RefreshToken);
-
+            _context.RefreshToken.Remove(existingRefreshToken);
+            //_context.RefreshTokens.RemoveRange(user.RefreshTokens.Where(rt => rt.Value == refreshTokenRequest.RefreshToken));
+            
             string token = _tokenService.IssueToken(user);
             RefreshToken refreshToken = _tokenService.GenerateRefreshToken();
-
+            
             user.RefreshTokens.Add(refreshToken);
             await _context.SaveChangesAsync();
 
@@ -137,13 +144,20 @@ namespace AdoptAPet.Controllers;
 
             int authenticatedUserId = int.Parse(userId);
 
-            User? user = await _context.Users.FindAsync(authenticatedUserId);
+            User? user = await _context.Users
+                .Include(u => u.RefreshTokens)
+                .FirstOrDefaultAsync(u => u.Id == authenticatedUserId);
             
             if (user == null)
             {
                 return Unauthorized("User not found.");
             }
 
+            if (user.RefreshTokens.Count == 0)
+            {
+                return Unauthorized("You are already logged out.");
+            }
+            
             user.RefreshTokens = new List<RefreshToken>();
             await _context.SaveChangesAsync();
 

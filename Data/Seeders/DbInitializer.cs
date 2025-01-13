@@ -10,6 +10,19 @@ public class DbInitializer
         using var context = new DataContext(
             serviceProvider.GetRequiredService<DbContextOptions<DataContext>>());
         
+        // Seed Roles
+        if (!context.Roles.Any())
+        {
+            var roles = new Role[]
+            {
+                new Role { Name = "Admin" },
+                new Role { Name = "User" }
+            };
+
+            context.Roles.AddRange(roles);
+            context.SaveChanges();
+        }
+
         // Seed Breeds
         if (!context.Breeds.Any())
         {
@@ -60,21 +73,22 @@ public class DbInitializer
         context.Pets.AddRange(pets);
         context.SaveChanges();
 
-
-        /*
+        var seededUsers = context.Users.ToList();
+        var seededPets = context.Pets.ToList();
         // Seed AdoptionRequests
         if (!context.AdoptionRequests.Any())
-        var adoptionRequests = new AdoptionRequest[]
         {
-            new AdoptionRequest { Date = DateTime.Now, IsApproved = false, UserId = 1, PetId = 1 },
-            new AdoptionRequest { Date = DateTime.Now, IsApproved = false, UserId = 2, PetId = 2 },
-            new AdoptionRequest { Date = DateTime.Now, IsApproved = false, UserId = 3, PetId = 3 }
-            new AdoptionRequest { Date = DateTime.Now, IsApproved = false, UserId = 4, PetId = 4 },
-            new AdoptionRequest { Date = DateTime.Now, IsApproved = false, UserId = 5, PetId = 5 }
-        };
+            var adoptionRequests = new AdoptionRequest[]
+            {
+                new AdoptionRequest { Date = DateTime.Now, IsApproved = false, UserId = seededUsers[0].Id, PetId = seededPets[0].Id },
+                new AdoptionRequest { Date = DateTime.Now, IsApproved = false, UserId = seededUsers[2].Id, PetId = seededPets[1].Id },
+                new AdoptionRequest { Date = DateTime.Now, IsApproved = false, UserId = seededUsers[0].Id, PetId = seededPets[2].Id },
+                new AdoptionRequest { Date = DateTime.Now, IsApproved = false, UserId = seededUsers[2].Id, PetId = seededPets[3].Id },
+                new AdoptionRequest { Date = DateTime.Now, IsApproved = false, UserId = seededUsers[0].Id, PetId = seededPets[4].Id }
+            };
 
-        context.AdoptionRequests.AddRange(adoptionRequests);
-        context.SaveChanges();
-       */
+            context.AdoptionRequests.AddRange(adoptionRequests);
+            context.SaveChanges();
+        }
     }
 }
