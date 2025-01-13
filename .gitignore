@@ -60,3 +60,5 @@ $RECYCLE.BIN/
 .idea/.idea/dictionaries
 .idea/.idea/libraries
 .idea/.idea/.name
+
+*.txt
